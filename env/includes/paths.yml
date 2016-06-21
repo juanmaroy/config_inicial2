@@ -13,27 +13,20 @@
 # This file defines paths to key applications for the project
 #
 
-#
-# Mari
-#
-mari_linux: 'Mari3.0'
-mari_mac: /Applications/Mari3.0v2
-mari_windows: 'C:\Program Files\Mari3.0v2\Bundle\bin\Mari3.0v2.exe'
-
 
 #
 # Maya
 #
-maya_windows: 'C:\Program Files\Autodesk\Maya2015\bin\maya.exe'
-maya_mac: /Applications/Autodesk/maya2015/Maya.app
+maya_windows: 'C:\Program Files\Autodesk\Maya2016.5\bin\maya.exe'
+maya_mac: /Applications/Autodesk/maya2016.5/Maya.app
 maya_linux: maya
 
 
 #
 # Nuke
 #
-nuke_mac: /Applications/Nuke9.0v8/Nuke9.0v8.app
-nuke_windows: 'C:\Program Files\Nuke9.0v8\Nuke9.0.exe'
+nuke_mac: /Applications/Nuke10.0v1/Nuke10.0v1.app
+nuke_windows: 'C:\Program Files\Nuke10.0v1\Nuke10.0.exe'
 nuke_linux: Nuke9.0
 
 
@@ -48,21 +41,13 @@ nukestudio_linux: Nuke9.0
 #
 # motionbuilder
 #
-motionbuilder_windows: 'C:\Program Files\Autodesk\MotionBuilder 2014\bin\x64\motionbuilder.exe'
+# motionbuilder_windows: 'C:\Program Files\Autodesk\MotionBuilder 2014\bin\x64\motionbuilder.exe'
 
 
 #
 # 3dsmax 2015
 #
 3dsmax_windows: 'C:\Program Files\Autodesk\3ds Max 2015\3dsmax.exe'
-
-
-#
-# Houdini
-#
-houdini_mac: /Applications/Houdini 15.0.244.16/Houdini.app
-houdini_windows: 'C:\Program Files\Side Effects Software\Houdini 15.0.244.16\bin\houdini.exe'
-houdini_linux: '/opt/hfs15.0.244.16/bin/houdini'
 
 
 #
@@ -78,21 +63,6 @@ photoshop_extras:
     mac_python_path: ''
     windows_extension_manager_path: 'C:\Program Files (x86)\Adobe\Adobe Extension Manager CS6\XManCommand.exe'
     windows_python_path: ''
-
-
-#
-# Hiero
-#
-hiero_mac: /Applications/Nuke9.0v8/Hiero9.0v8.app
-hiero_win: 'C:\Program Files\Nuke9.0v8\Nuke9.0.exe'
-hiero_linux: Nuke9.0
-
-
-#
-# Softimage
-#
-softimage_windows: C:\Program Files\Autodesk\Softimage 2013\Application\bin\XSI.bat
-softimage_linux: XSI
 
 
 #
