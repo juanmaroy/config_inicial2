@@ -77,9 +77,12 @@ engines:
         hook_post_publish: default
         hook_primary_pre_publish: default
         hook_primary_publish: default
+
+        # Modificado para publicar camaras
         hook_scan_scene: default
         hook_secondary_pre_publish: default
         hook_secondary_publish: default
+        
         hook_thumbnail: default
         location:
           version: v0.9.1
@@ -91,7 +94,20 @@ engines:
         primary_publish_template: maya_shot_publish
         primary_scene_item_type: work_file
         primary_tank_type: Maya Scene
-        secondary_outputs: []
+        secondary_outputs: [
+          # - description: 'Publish a camera'
+          #   display_group: Cameras
+          #   display_name: Camera
+          #   icon: 'icons/camera.png'
+          #   name: camera
+          #   publish_template: maya_shot_camera
+          #   required: false
+          #   scene_item_type: camera
+          #   selected: false
+          #   publish_group: false
+          #   group_name: default
+          #   tank_type: 'Camera'
+        ]
         template_work: maya_shot_work
       tk-multi-screeningroom: '@launch_screeningroom'
       tk-multi-setframerange:
