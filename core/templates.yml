@@ -89,26 +89,26 @@ keys:
         type: str
 
     # These are used for the Mari UDIM pipeline:
-    UDIM:
-        type: sequence
-        default: "<UDIM>"
-    mari.channel:
-        type: str
-        alias: channel
-    mari.layer:
-        type: str
-        alias: layer
-    mari.project_name:
-        type: str
-        alias: name
-    asset_name:
-        type: str
-        shotgun_entity_type: Asset
-        shotgun_field_name: code
-    task_name:
-        type: str
-        shotgun_entity_type: Task
-        shotgun_field_name: content
+    # UDIM:
+    #     type: sequence
+    #     default: "<UDIM>"
+    # mari.channel:
+    #     type: str
+    #     alias: channel
+    # mari.layer:
+    #     type: str
+    #     alias: layer
+    # mari.project_name:
+    #     type: str
+    #     alias: name
+    # asset_name:
+    #     type: str
+    #     shotgun_entity_type: Asset
+    #     shotgun_field_name: code
+    # task_name:
+    #     type: str
+    #     shotgun_entity_type: Task
+    #     shotgun_field_name: content
 
     # Maya supports two extension types.
     maya_extension:
@@ -118,6 +118,10 @@ keys:
             mb: Maya Binary (.mb)
         default: ma
         alias: extension
+
+    # Para publicar Alembic de Shots
+    grp_name:
+        type: str
 
 #
 # The paths section contains all the the key locations where files are to be stored
@@ -234,7 +238,14 @@ paths:
     maya_shot_publish:
         definition: '@shot_root/publish/maya/{name}.v{version}.{maya_extension}'
         root_name: 'primary'
-
+    # Lugar para publicacion de la camara de maya
+    maya_shot_camera:
+        definition: '@shot_root/publish/maya/camera/{name}.v{version}.ma'
+        root_name: 'primary'
+      # Lugar para publicacion de Alembic de Shots
+    maya_shot_mesh_alembic_cache:
+        definition: '@shot_root/publish/maya/{name}[_{grp_name}].v{version}.abc'
+        root_name: 'primary'
 
     #
     # Nuke
