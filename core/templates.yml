@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (c) 2015 Shotgun Software Inc.
 #
 # CONFIDENTIAL AND PROPRIETARY
@@ -119,8 +120,14 @@ keys:
         default: ma
         alias: extension
 
-    # Para publicar Alembic de Shots
+    # Para publicar Alembic de Shots en Maya
     grp_name:
+        type: str
+
+    # Para publicar RENDER de Maya: nombre de camara y de capa
+    maya.camera_name:
+        type: str
+    maya.layer_name:
         type: str
 
 #
@@ -238,14 +245,19 @@ paths:
     maya_shot_publish:
         definition: '@shot_root/publish/maya/{name}.v{version}.{maya_extension}'
         root_name: 'primary'
-    # Lugar para publicacion de la camara de maya
+    # Lugar para publicacion de la CAMARA de Maya
     maya_shot_camera:
         definition: '@shot_root/publish/maya/camera/{name}.v{version}.ma'
         root_name: 'primary'
-      # Lugar para publicacion de Alembic de Shots
+    # Lugar para publicacion de Alembic de Shots
     maya_shot_mesh_alembic_cache:
         definition: '@shot_root/publish/maya/{name}[_{grp_name}].v{version}.abc'
         root_name: 'primary'
+    # Para publicar los render de Maya
+    maya_shot_render:
+      # definition: '@shot_root/work/images/{maya.camera_name}/{maya.layer_name}/v{version}/{name}.{SEQ}.png'
+      definition: '@shot_root/work/maya/images/{maya.camera_name}/{name}.v{version}.{SEQ}.png'
+      root_name: 'primary'
 
     #
     # Nuke

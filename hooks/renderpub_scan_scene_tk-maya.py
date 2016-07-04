@@ -76,6 +76,7 @@ class ScanSceneHook(Hook):
         # Modificacion para publicar CAMARAS
         # look for cameras to publish
         for camera in cmds.listCameras(perspective=True):
+            # aqui meter la condicion de que esten marcadas como renderable
             items.append({"type": "camera", "name": camera})
 
         # Añadido para publicar RENDER
@@ -96,7 +97,7 @@ class ScanSceneHook(Hook):
         secondary_outputs = app.get_setting("secondary_outputs")
         render_outputs = [out for out in secondary_outputs if out["tank_type"] == "Rendered Image"]
         for render_output in render_outputs:
-
+            # AQUI ESTA EL ERROR!!!!
             render_template = app.sgtk.get_template(render_output["publish_template"])
 
             # now look for rendered images. note that the cameras returned from

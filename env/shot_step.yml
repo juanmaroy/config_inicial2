@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (c) 2015 Shotgun Software Inc.
 #
 # CONFIDENTIAL AND PROPRIETARY
@@ -77,10 +78,10 @@ engines:
         hook_post_publish: default
         hook_primary_pre_publish: default
         hook_primary_publish: default
-        # Modificar para publicar camaras
-        hook_scan_scene: default
-        hook_secondary_pre_publish: default
-        hook_secondary_publish: default
+        # Modificar para publicar camaras y RENDER
+        hook_scan_scene: renderpub_scan_scene_tk-maya
+        hook_secondary_pre_publish: renderpub_secondary_pre_publish_tk-maya
+        hook_secondary_publish: renderpub_secondary_publish_tk-maya
         hook_thumbnail: default
         location:
           version: v0.9.1
@@ -92,19 +93,31 @@ engines:
         primary_publish_template: maya_shot_publish
         primary_scene_item_type: work_file
         primary_tank_type: Maya Scene
-        secondary_outputs: []
+        secondary_outputs:
+        - description: 'Publish a rendered image sequence'
+          display_group: Renders
+          display_name: Rendered
+          icon: 'icons/publish_nuke_writenode.png'
+          name: rendered_image
+          publish_template: maya_shot_render
+          required: false
+          scene_item_type: rendered_image
+          selected: false
+          publish_group: false
+          group_name: default
+          tank_type: 'Rendered Image'
         # - description: 'Publish a camera'
-        #   display_group: Cameras
-        #   display_name: Camera
-        #   icon: 'icons/camera.png'
-        #   name: camera
-        #   publish_template: maya_shot_camera
-        #   required: false
-        #   scene_item_type: camera
-        #   selected: false
-        #   # publish_group: false
-        #   # group_name: default
-        #   tank_type: 'Camera'
+          # display_group: Cameras
+          # display_name: Camera
+          # icon: 'icons/camera.png'
+          # name: camera
+          # publish_template: maya_shot_camera
+          # required: false
+          # scene_item_type: camera
+          # selected: false
+          # publish_group: false
+          # group_name: default
+          # tank_type: 'Camera'
         # - description: 'Publish Alembic Cache data for the model'
         #   display_group: Caches
         #   display_name: Alembic Cache
@@ -208,7 +221,7 @@ engines:
         hook_filter_publishes: default
         hook_filter_work_files: default
         hook_scene_operation: default
-        launch_at_startup: false
+        launch_at_startup: true
         location:
           version: v0.7.31
           type: app_store
