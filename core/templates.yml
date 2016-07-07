@@ -249,13 +249,15 @@ paths:
     maya_shot_camera:
         definition: '@shot_root/publish/maya/camera/{name}.v{version}.ma'
         root_name: 'primary'
-    # Lugar para publicacion de Alembic de Shots
+    # Lugar para publicacion de ALEMBIC de Shots
     maya_shot_mesh_alembic_cache:
         definition: '@shot_root/publish/maya/{name}[_{grp_name}].v{version}.abc'
         root_name: 'primary'
-    # Para publicar los render de Maya
+    # Lugar para publicacion de los RENDER de Maya
     maya_shot_render:
       # definition: '@shot_root/work/images/{maya.camera_name}/{maya.layer_name}/v{version}/{name}.{SEQ}.png'
+      # prueba de carpeta OPCIONAL
+      # definition: '@shot_root/work/maya/images/[{maya.camera_name}/]{name}.v{version}.{SEQ}.png'
       definition: '@shot_root/work/maya/images/{maya.camera_name}/{name}.v{version}.{SEQ}.png'
       root_name: 'primary'
 

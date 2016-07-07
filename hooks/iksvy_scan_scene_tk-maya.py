@@ -79,7 +79,14 @@ class ScanSceneHook(Hook):
             # aqui meter la condicion de que esten marcadas como renderable
             items.append({"type": "camera", "name": camera})
 
-        # Añadido para publicar RENDER
+        # Modificacion para publicar ALEMBIC
+        # look for root level groups that have meshes as children:
+        for grp in cmds.ls(assemblies=True, long=True):
+            if cmds.ls(grp, dag=True, type="mesh"):
+                # include this group as a 'mesh_group' type
+                items.append({"type":"mesh_group", "name":grp})
+
+        # Modificacion para publicar RENDER
         # we'll use the engine to get the templates
         engine = tank.platform.current_engine()
 
@@ -97,6 +104,7 @@ class ScanSceneHook(Hook):
         secondary_outputs = app.get_setting("secondary_outputs")
         render_outputs = [out for out in secondary_outputs if out["tank_type"] == "Rendered Image"]
         for render_output in render_outputs:
+
             # AQUI ESTA EL ERROR!!!!
             # render_template = app.get_template(render_output["publish_template"])
 
