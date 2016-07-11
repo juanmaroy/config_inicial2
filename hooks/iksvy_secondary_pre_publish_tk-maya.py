@@ -88,12 +88,15 @@ class PrePublishHook(Hook):
             # report progress:
             progress_cb(0, "Validating", task)
 
-            # pre-publish alembic_cache output
+            # pre-publish ALEMBIC CACHE output
             if output["name"] == "alembic_cache":
                 errors.extend(self.__validate_item_for_alembic_cache_publish(item))
-            # pre-publish render output
+            # pre-publish RENDER output
             elif output["name"] == "rendered_image":
                 errors.extend(self.__validate_item_for_rendered_image_publish(item))
+            # pre-publish CAMERA output
+            elif output["name"] == "camera":
+                errors.extend(self.__validate_item_for_camera(item))
             else:
                 # don't know how to publish this output types!
                 errors.append("Don't know how to publish this item!")
@@ -158,5 +161,20 @@ class PrePublishHook(Hook):
         # File sizes are consistent
         # Permissions are correct
         # Secondary files exist (thumbnails or quicktimes, for example)
+
+        # finally return any errors
+        return errors
+        
+    def __validate_item_for_camera(self, item):
+        """
+        Validate that the item is valid to be exported to a camera
+
+        :param item:    The item to validate
+        :returns:       A list of any errors found during validation
+
+        """
+
+        # add error checking here!
+        errors = []
 
         return errors

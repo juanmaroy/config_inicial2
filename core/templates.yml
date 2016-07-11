@@ -40,7 +40,8 @@ keys:
         type: str
     name:
         type: str
-        filter_by: alphanumeric
+        # filter_by: alphanumeric
+        filter_by: ^[A-Za-z0-9_]+$
     iteration:
         type: int
     version:
@@ -257,8 +258,8 @@ paths:
     maya_shot_render:
       # definition: '@shot_root/work/images/{maya.camera_name}/{maya.layer_name}/v{version}/{name}.{SEQ}.png'
       # prueba de carpeta OPCIONAL
-      # definition: '@shot_root/work/maya/images/[{maya.camera_name}/]{name}.v{version}.{SEQ}.png'
-      definition: '@shot_root/work/maya/images/{maya.camera_name}/{name}.v{version}.{SEQ}.png'
+      # definition: '@shot_root/work/maya/images/[{maya.camera_name}/]{name}.v{version}.{SEQ}.exr'
+      definition: '@shot_root/work/maya/images/{maya.camera_name}/{maya.camera_name}_{name}.v{version}.{SEQ}.png'
       root_name: 'primary'
 
     #

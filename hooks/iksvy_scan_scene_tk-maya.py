@@ -132,9 +132,13 @@ class ScanSceneHook(Hook):
                     fields = {
                         'maya.camera_name': camera,
                         'maya.layer_name': layer,
+                        # codigo original:
                         # 'name': layer,
-                        'name': layer,
+                        # 'name': name.version
+                        # 'name': os.path.splitext(name)[0],
+                        'name': name.split('.')[0],
                         # si pongo 'name' en lugar de 'layer' da error
+                        # <Sgtk StringKey name> Illegal value 'scene.v008.ma' does not fit filter_by 'alphanumeric'
                         'version': version,
                     }
 
@@ -148,7 +152,7 @@ class ScanSceneHook(Hook):
                             "type": "rendered_image",
                             # OJO OJO OJO     HE CAMBIADO PARA PROBAR     OJO OJO OJO
                             # "name": layer,
-                            "name": name,
+                            "name": camera+"_"+layer+"_"+os.path.splitext(name)[0],
                             # Ahora aparece en el menu de publicacion
                             # el nombre del fichero como identificador de la capa
                             # para elegir cuales se publican
