@@ -43,6 +43,7 @@ engines:
           Maya Scene: [reference, import]
           Photoshop Image: [texture_node]
           Rendered Image: [texture_node]
+          Camera: [import]
         actions_hook: '{self}/tk-maya_actions.py'
         download_thumbnails: true
         entities:
@@ -193,8 +194,8 @@ engines:
           type: app_store
           name: tk-multi-workfiles2
         my_tasks_extra_display_fields: []
-        saveas_default_name: scene
-        saveas_prefer_version_up: false
+        saveas_default_name: tarea
+        saveas_prefer_version_up: true
         show_my_tasks: true
         template_publish: maya_shot_publish
         template_publish_area: shot_publish_area_maya
@@ -202,7 +203,7 @@ engines:
         template_work_area: shot_work_area_maya
         version_compare_ignore_fields: []
     compatibility_dialog_min_version: 2015
-    debug_logging: false
+    debug_logging: true
     location:
       version: v0.5.5
       type: app_store

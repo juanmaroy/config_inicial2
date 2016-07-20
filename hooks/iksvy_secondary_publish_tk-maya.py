@@ -123,7 +123,7 @@ class PublishHook(Hook):
                         progress_cb,
                     )
                 except Exception, e:
-                   errors.append("Publish failed - %s" % e)
+                   errors.append("Alembic publish failed - %s" % e)
 
             # Para publicar CAMARA
             elif output["name"] == "camera":
@@ -132,7 +132,7 @@ class PublishHook(Hook):
                                                    primary_publish_path, sg_task, comment,
                                                    thumbnail_path, progress_cb)
                          except Exception, e:
-                             errors.append("Publish failed - %s" % e)
+                             errors.append("Camera publish failed - %s" % e)
 
             # Para publicar RENDER
             elif output["name"] == "rendered_image":
@@ -141,7 +141,7 @@ class PublishHook(Hook):
                        work_template, primary_publish_path, sg_task, comment,
                        thumbnail_path, progress_cb)
                 except Exception, e:
-                   errors.append("Publish failed - %s" % e)
+                   errors.append("Render files publish failed - %s" % e)
 
             else:
                 # don't know how to publish this output types!
@@ -173,7 +173,7 @@ class PublishHook(Hook):
 
             # determine the publish info to use
             #
-            progress_cb(10, "Determining publish details")
+            progress_cb(10, "Determining Camera publish details")
 
             # get the current scene path and extract fields from it
             # using the work template:
@@ -182,6 +182,10 @@ class PublishHook(Hook):
             publish_version = fields["version"]
             tank_type = output["tank_type"]
             cam_name = item['name']
+
+            # Añado la conversión de la primera letra de la cámara a mayúscula
+            cam_name = cam_name[0].upper() + cam_name[1:]
+            
             fields['obj_name'] = cam_name
             fields['name'] = re.sub(r'[\W_]+', '', cam_name)
 
@@ -201,7 +205,7 @@ class PublishHook(Hook):
 
             # Find additional info from the scene:
             #
-            progress_cb(10, "Analysing scene")
+            progress_cb(10, "Analysing scene for Camera publishing")
 
             cmds.select(cam_name, replace=True)
 
@@ -211,12 +215,12 @@ class PublishHook(Hook):
             #     options="v=0", prompt=False, force=True)
 
             # escribe un fichero .fbx en la ruta de publicacion con definiciones de camara
-            progress_cb(25, "Exporting the camera.")
+            progress_cb(25, "Exporting the camera")
             cmds.file(publish_path, type='FBX export', exportSelected=True,
                 options="v=0", prompt=False, force=True)
 
             # register the publish:
-            progress_cb(75, "Registering the publish")
+            progress_cb(75, "Registering the Camera publish")
             args = {
                 "tk": self.parent.tank,
                 "context": self.parent.context,
@@ -247,7 +251,7 @@ class PublishHook(Hook):
             """
             # determine the publish info to use
             #
-            progress_cb(10, "Determining publish details")
+            progress_cb(10, "Determining Alembic publish details")
 
             # get the current scene path and extract fields from it
             # using the work template:
@@ -304,7 +308,7 @@ class PublishHook(Hook):
                 raise TankError("Failed to export Alembic Cache: %s" % e)
 
             # register the publish:
-            progress_cb(75, "Registering the publish")
+            progress_cb(75, "Registering the Alembic publish")
             args = {
                 "tk": self.parent.tank,
                 "context": self.parent.context,
@@ -356,7 +360,7 @@ class PublishHook(Hook):
 
             # determine the publish info to use
             #
-            progress_cb(10, "Determining publish details")
+            progress_cb(10, "Determining Render publish details")
 
             # get the current scene path and extract fields from it
             # using the work template:
@@ -376,7 +380,7 @@ class PublishHook(Hook):
             publish_path = other_params["path"]
 
             # register the publish:
-            progress_cb(75, "Registering the publish")
+            progress_cb(75, "Registering the Render publish")
             args = {
                 "tk": self.parent.tank,
                 "context": self.parent.context,

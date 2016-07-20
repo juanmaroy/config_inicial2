@@ -236,30 +236,33 @@ paths:
         root_name: 'primary'
     # The location of WIP files
     maya_shot_work:
-        definition: '@shot_root/work/maya/{name}.v{version}.{maya_extension}'
+        # definition: '@shot_root/work/maya/{name}.v{version}.{maya_extension}'
+        definition: '@shot_root/work/maya/NAU_{Sequence}_{Shot}_{name}_v{version}.{maya_extension}'
         root_name: 'primary'
     # The location of backups of WIP files
     maya_shot_snapshot:
-        definition: '@shot_root/work/maya/snapshots/{name}.v{version}.{timestamp}.{maya_extension}'
+        definition: '@shot_root/work/maya/snapshots/NAU_{Sequence}_{Shot}_{name}_v{version}.{timestamp}.{maya_extension}'
         root_name: 'primary'
     # The location of published maya files
     maya_shot_publish:
-        definition: '@shot_root/publish/maya/{name}.v{version}.{maya_extension}'
+        definition: '@shot_root/publish/maya/NAU_{Sequence}_{Shot}_{name}_v{version}.{maya_extension}'
         root_name: 'primary'
     # Lugar para publicacion de la CAMARA de Maya
     maya_shot_camera:
-        definition: '@shot_root/publish/maya/camera/{name}.v{version}.ma'
+        definition: '@shot_root/publish/maya/camera/NAU_{Sequence}_{Shot}_cam{name}_v{version}.fbx'
         root_name: 'primary'
     # Lugar para publicacion de ALEMBIC de Shots
     maya_shot_mesh_alembic_cache:
-        definition: '@shot_root/publish/maya/{name}[_{grp_name}].v{version}.abc'
+        definition: '@shot_root/publish/maya/NAU_{Sequence}_{Shot}_{name}[_{grp_name}]_v{version}.abc'
         root_name: 'primary'
     # Lugar para publicacion de los RENDER de Maya
     maya_shot_render:
       # definition: '@shot_root/work/images/{maya.camera_name}/{maya.layer_name}/v{version}/{name}.{SEQ}.png'
       # prueba de carpeta OPCIONAL
       # definition: '@shot_root/work/maya/images/[{maya.camera_name}/]{name}.v{version}.{SEQ}.exr'
-      definition: '@shot_root/work/maya/images/{maya.camera_name}/{maya.camera_name}_{name}.v{version}.{SEQ}.png'
+      # definition: '@shot_root/work/maya/images/{maya.camera_name}/{maya.camera_name}_{name}.v{version}.{SEQ}.png'
+      # definition: '@shot_root/work/maya/images/NAU_{Sequence}_{Shot}_{name}_v{version}.{SEQ}.png'
+      definition: '@shot_root/work/maya/images/{name}.{SEQ}.png'
       root_name: 'primary'
 
     #

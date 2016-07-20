@@ -99,12 +99,13 @@ class ScanSceneHook(Hook):
         work_template_fields = work_template.get_fields(scene_name)
         version = work_template_fields["version"]
 
+
         # get all the secondary output render templates and match them against
         # what is on disk
         secondary_outputs = app.get_setting("secondary_outputs")
         render_outputs = [out for out in secondary_outputs if out["tank_type"] == "Rendered Image"]
         for render_output in render_outputs:
-
+            self.parent.log_debug("render_output vale: %s" % render_output)
             # AQUI ESTA EL ERROR!!!!
             # render_template = app.get_template(render_output["publish_template"])
 
@@ -112,6 +113,10 @@ class ScanSceneHook(Hook):
             # Es una forma tosca de resolverlo
             # se supone que lo anterior es mas elaborado
             render_template = engine.tank.templates.get("maya_shot_render")
+            self.parent.log_debug("render_template vale: %s" % render_template)
+            # maya_shot_render:
+            # definition: '@shot_root/work/maya/images/NAU_{name}_v{version}.{SEQ}.png'
+            # root_name: 'primary'
 
             # now look for rendered images. note that the cameras returned from
             # listCameras will include full DAG path. You may need to account
@@ -120,7 +125,12 @@ class ScanSceneHook(Hook):
             # are not parented, so there is no hierarchy.
 
             # iterate over all cameras and layers
-            for camera in cmds.listCameras():
+            self.parent.log_debug("listCameras vale: %s" % cmds.listCameras(p=True))
+
+            # camera_list = (camera for camera in cmds.listCameras() if camera not in ('front', 'side', 'top'))
+            for camera in cmds.listCameras(p=True):
+            # for camera in camera_list:
+
                 for layer in cmds.ls(type="renderLayer"):
 
                     # apparently maya has 2 names for the default layer. I'm
@@ -134,25 +144,35 @@ class ScanSceneHook(Hook):
                         'maya.layer_name': layer,
                         # codigo original:
                         # 'name': layer,
-                        # 'name': name.version
+                        # 'name': name,  # DA ERROR porque el nombre tiene .ma
                         # 'name': os.path.splitext(name)[0],
-                        'name': name.split('.')[0],
+                        'name': name.split('.')[0],  # ESTE FUNCIONA PERO OJO SI EL USUARIO METE PUNTOS!!
+                        # 'name': 'NAU_'+ shot ,
                         # si pongo 'name' en lugar de 'layer' da error
                         # <Sgtk StringKey name> Illegal value 'scene.v008.ma' does not fit filter_by 'alphanumeric'
+                        # Eso pasaba porque tenía .ma. El punto no le gusta
                         'version': version,
                     }
-
+                    self.parent.log_debug("fields vale: %s" % fields)
                     # match existing paths against the render template
                     paths = engine.tank.abstract_paths_from_template(
                         render_template, fields)
-
+                    self.parent.log_debug("paths vale: %s" % paths)
                     # if there's a match, add an item to the render
+
+                    # os.paths.exists('path')
+
                     if paths:
                         items.append({
                             "type": "rendered_image",
-                            # OJO OJO OJO     HE CAMBIADO PARA PROBAR     OJO OJO OJO
+                            # Este es el nombre que aparece en dialogo "Publish"
                             # "name": layer,
-                            "name": camera+"_"+layer+"_"+os.path.splitext(name)[0],
+                            # "name": camera+"_"+layer+"_"+os.path.splitext(name)[],
+                            # "name": os.path.splitext(name)[], ESTO DA ERROR
+                            # 'name': name.split('.')[0], ESTO DA ERROR
+                            # 'name': self.parent.context.Entity.name, ESTO DA ERROR
+                            # "name": 'Cam: '+ camera + ' File: ' + name,
+                            "name": camera,
                             # Ahora aparece en el menu de publicacion
                             # el nombre del fichero como identificador de la capa
                             # para elegir cuales se publican
