@@ -126,8 +126,9 @@ class ScanSceneHook(Hook):
             # are not parented, so there is no hierarchy.
 
             # iterate over all cameras and layers
-            self.parent.log_debug("listCameras vale: %s" % cmds.listCameras(p=True))
+            self.parent.log_debug("listCameras vale: %s" % cameras)
 
+            # cameras está creada más arriba, al preparar la lista de cámaras
             for camera in cameras:
 
                 for layer in cmds.ls(type="renderLayer"):
@@ -144,37 +145,41 @@ class ScanSceneHook(Hook):
                         # codigo original:
                         # 'name': layer,
                         # 'name': name,  # DA ERROR porque el nombre tiene .ma
-                        # 'name': os.path.splitext(name)[0],
-                        'name': name.split('.')[0],  # ESTE FUNCIONA PERO OJO SI EL USUARIO METE PUNTOS!!
-                        # 'name': 'NAU_'+ shot ,
-                        # si pongo 'name' en lugar de 'layer' da error
                         # <Sgtk StringKey name> Illegal value 'scene.v008.ma' does not fit filter_by 'alphanumeric'
-                        # Eso pasaba porque tenía .ma. El punto no le gusta
+                        # 'name': os.path.splitext(name)[0],
+                        # Este nombre va a ser el nombre del fichero(s) publicado
+                        'name': name.split('.')[0],  # ESTE FUNCIONA porque quito el punto
                         'version': version,
                     }
                     self.parent.log_debug("fields vale: %s" % fields)
+
                     # match existing paths against the render template
                     paths = engine.tank.abstract_paths_from_template(
                         render_template, fields)
                     self.parent.log_debug("paths vale: %s" % paths)
+
                     # if there's a match, add an item to the render
 
-                    # os.paths.exists('path')
+                    # Comprobar que existen los frames
+                    paths_existe = engine.tank.paths_from_template(
+                        render_template, fields)
+                    self.parent.log_debug("paths sin abs vale: %s" % paths_sinabs)
 
-                    if paths:
+
+                    if paths_existe:
                         items.append({
                             "type": "rendered_image",
                             # Este es el nombre que aparece en dialogo "Publish"
+                            # Y una vez publicado aparece en el campo "Name"
                             # "name": layer,
                             # "name": camera+"_"+layer+"_"+os.path.splitext(name)[],
                             # "name": os.path.splitext(name)[], ESTO DA ERROR
                             # 'name': name.split('.')[0], ESTO DA ERROR
                             # 'name': self.parent.context.Entity.name, ESTO DA ERROR
-                            # "name": 'Cam: '+ camera + ' File: ' + name,
-                            "name": camera,
-                            # Ahora aparece en el menu de publicacion
-                            # el nombre del fichero como identificador de la capa
-                            # para elegir cuales se publican
+                            # Modifico el nombre de la cámara para que la primera
+                            # letra sea mayúscua
+                            "name": 'cam'+ camera[0].upper() + camera[1:] + '_' + layer,
+                            # "name": camera,
 
                             # since we already know the path, pass it along for
                             # publish hook to use
@@ -184,5 +189,5 @@ class ScanSceneHook(Hook):
                                 'path': paths[0],
                             }
                         })
-
+        self.parent.log_debug("items vale: %s" % items)
         return items
