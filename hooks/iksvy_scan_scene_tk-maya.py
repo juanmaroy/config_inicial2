@@ -75,8 +75,9 @@ class ScanSceneHook(Hook):
 
         # Modificacion para publicar CAMARAS
         # look for cameras to publish
-        for camera in cmds.listCameras(perspective=True):
-            # aqui meter la condicion de que esten marcadas como renderable
+        # Evito la cámara "persp"
+        cameras = [cameras for cameras in cmds.listCameras(p=True) if cameras != 'persp']
+        for camera in cameras:
             items.append({"type": "camera", "name": camera})
 
         # Modificacion para publicar ALEMBIC
@@ -127,9 +128,7 @@ class ScanSceneHook(Hook):
             # iterate over all cameras and layers
             self.parent.log_debug("listCameras vale: %s" % cmds.listCameras(p=True))
 
-            # camera_list = (camera for camera in cmds.listCameras() if camera not in ('front', 'side', 'top'))
-            for camera in cmds.listCameras(p=True):
-            # for camera in camera_list:
+            for camera in cameras:
 
                 for layer in cmds.ls(type="renderLayer"):
 

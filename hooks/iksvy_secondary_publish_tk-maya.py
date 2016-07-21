@@ -183,11 +183,11 @@ class PublishHook(Hook):
             tank_type = output["tank_type"]
             cam_name = item['name']
 
+            # Código original
+            # fields['obj_name'] = cam_name
             # Añado la conversión de la primera letra de la cámara a mayúscula
-            cam_name = cam_name[0].upper() + cam_name[1:]
-            
-            fields['obj_name'] = cam_name
-            fields['name'] = re.sub(r'[\W_]+', '', cam_name)
+            fields['obj_name'] = cam_name[0].upper() + cam_name[1:]
+            fields['name'] = re.sub(r'[\W_]+', '', cam_name[0].upper() + cam_name[1:])
 
             # create the publish path by applying the fields
             # with the publish template:
@@ -199,6 +199,7 @@ class PublishHook(Hook):
             self.parent.ensure_folder_exists(publish_folder)
 
             # determine the publish name
+            # el campo "Name" de Published Files
             publish_name = fields.get("obj_name")
             if not publish_name:
                 publish_name = os.path.basename(publish_path)
