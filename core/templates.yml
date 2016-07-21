@@ -90,28 +90,6 @@ keys:
     project:
         type: str
 
-    # These are used for the Mari UDIM pipeline:
-    # UDIM:
-    #     type: sequence
-    #     default: "<UDIM>"
-    # mari.channel:
-    #     type: str
-    #     alias: channel
-    # mari.layer:
-    #     type: str
-    #     alias: layer
-    # mari.project_name:
-    #     type: str
-    #     alias: name
-    # asset_name:
-    #     type: str
-    #     shotgun_entity_type: Asset
-    #     shotgun_field_name: code
-    # task_name:
-    #     type: str
-    #     shotgun_entity_type: Task
-    #     shotgun_field_name: content
-
     # Maya supports two extension types.
     maya_extension:
         type: str
@@ -164,29 +142,6 @@ paths:
     # Project level paths
     #
 
-    #
-    # Hiero
-    #
-
-    # The location of WIP files
-    # hiero_project_work:
-    #     definition: 'editorial/work/{name}_v{version}.hrox'
-    #     root_name: 'primary'
-    # hiero_project_work_area:
-    #     definition: 'editorial/work'
-    #     root_name: 'primary'
-    # # The location of backups of WIP files
-    # hiero_project_snapshot:
-    #     definition: 'editorial/work/snapshots/{name}_v{version}_{timestamp}.hrox'
-    #     root_name: 'primary'
-    # # The location of published maya files
-    # hiero_project_publish:
-    #     definition: 'editorial/publish/{name}_v{version}.hrox'
-    #     root_name: 'primary'
-    # hiero_project_publish_area:
-    #     definition: 'editorial/publish'
-    #     root_name: 'primary'
-
 
     ##########################################################################################
     # Sequence level paths
@@ -220,7 +175,6 @@ paths:
     photoshop_shot_publish:
         definition: '@shot_root/publish/photoshop/{name}.v{version}.psd'
         root_name: 'primary'
-
 
     #
     # Maya
@@ -262,7 +216,7 @@ paths:
       # definition: '@shot_root/work/maya/images/[{maya.camera_name}/]{name}.v{version}.{SEQ}.exr'
       # definition: '@shot_root/work/maya/images/{maya.camera_name}/{maya.camera_name}_{name}.v{version}.{SEQ}.png'
       # definition: '@shot_root/work/maya/images/NAU_{Sequence}_{Shot}_{name}_v{version}.{SEQ}.png'
-      definition: '@shot_root/work/maya/images/{name}.{SEQ}.png'
+      definition: '@shot_root/work/maya/images/{maya.camera_name}/{maya.layer_name}/{name}.{SEQ}.png'
       root_name: 'primary'
 
     #
@@ -424,11 +378,8 @@ strings:
 
     # when a review Version in Shotgun is created inside of Nuke, this is the
     # name that is being given to it (the code field)
-    nuke_shot_version_name: "{Shot}_{name}_{nuke.output}_v{version}.{iteration}"
-    nuke_quick_shot_version_name: "{Shot}_{name}_quick_{iteration}"
+    nuke_shot_version_name: "NAU_{Sequence}_{Shot}_{name}_{nuke.output}_v{version}.{iteration}"
+    nuke_quick_shot_version_name: "NAU_{Sequence}_{Shot}_{name}_quick_{iteration}"
 
     nuke_asset_version_name: "{Asset}_{name}_{nuke.output}_v{version}.{iteration}"
     nuke_quick_asset_version_name: "{Asset}_{name}_quick_{iteration}"
-
-    # defines how the {tk_version} token in Hiero gets formatted back to tk.
-    # hiero_version: "{version}"
