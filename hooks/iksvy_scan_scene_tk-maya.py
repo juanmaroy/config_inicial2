@@ -127,16 +127,13 @@ class ScanSceneHook(Hook):
 
             # iterate over all cameras and layers
             self.parent.log_debug("listCameras vale: %s" % cameras)
-
             # cameras está creada más arriba, al preparar la lista de cámaras
+
             for camera in cameras:
-
                 for layer in cmds.ls(type="renderLayer"):
-
                     # apparently maya has 2 names for the default layer. I'm
                     # guessing it actually renders out as 'masterLayer'.
                     layer = layer.replace("defaultRenderLayer", "masterLayer")
-
                     # these are the fields to populate into the template to match
                     # against
                     fields = {
@@ -146,25 +143,21 @@ class ScanSceneHook(Hook):
                         # 'name': layer,
                         # 'name': name,  # DA ERROR porque el nombre tiene .ma
                         # <Sgtk StringKey name> Illegal value 'scene.v008.ma' does not fit filter_by 'alphanumeric'
-                        # 'name': os.path.splitext(name)[0],
-                        # Este nombre va a ser el nombre del fichero(s) publicado
-                        'name': name.split('.')[0],  # ESTE FUNCIONA porque quito el punto
+                        # Este nombre va a ser el nombre del fichero(s) publicado 
+                        'name': name.split('.')[0],  # ESTE FUNCIONA
                         'version': version,
                     }
                     self.parent.log_debug("fields vale: %s" % fields)
-
                     # match existing paths against the render template
-                    paths = engine.tank.abstract_paths_from_template(
-                        render_template, fields)
-                    self.parent.log_debug("paths vale: %s" % paths)
-
-                    # if there's a match, add an item to the render
-
                     # Comprobar que existen los frames
                     paths_existe = engine.tank.paths_from_template(
                         render_template, fields)
-                    self.parent.log_debug("paths sin abs vale: %s" % paths_sinabs)
+                    self.parent.log_debug("paths sin abs vale: %s" % paths_existe)
 
+                    paths = engine.tank.abstract_paths_from_template(
+                        render_template, fields)
+                    self.parent.log_debug("paths vale: %s" % paths)
+                    # if there's a match, add an item to the render
 
                     if paths_existe:
                         items.append({
@@ -172,15 +165,9 @@ class ScanSceneHook(Hook):
                             # Este es el nombre que aparece en dialogo "Publish"
                             # Y una vez publicado aparece en el campo "Name"
                             # "name": layer,
-                            # "name": camera+"_"+layer+"_"+os.path.splitext(name)[],
                             # "name": os.path.splitext(name)[], ESTO DA ERROR
                             # 'name': name.split('.')[0], ESTO DA ERROR
-                            # 'name': self.parent.context.Entity.name, ESTO DA ERROR
-                            # Modifico el nombre de la cámara para que la primera
-                            # letra sea mayúscua
                             "name": 'cam'+ camera[0].upper() + camera[1:] + '_' + layer,
-                            # "name": camera,
-
                             # since we already know the path, pass it along for
                             # publish hook to use
                             "other_params": {
