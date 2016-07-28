@@ -142,7 +142,29 @@ paths:
     # Project level paths
     #
 
+    #
+    # Hiero
+    #
 
+    # The location of WIP files
+    hiero_project_work:
+        definition: 'editorial/work/{name}_v{version}.hrox'
+        root_name: 'primary'
+    hiero_project_work_area:
+        definition: 'editorial/work'
+        root_name: 'primary'
+    # The location of backups of WIP files
+    hiero_project_snapshot:
+        definition: 'editorial/work/snapshots/{name}_v{version}_{timestamp}.hrox'
+        root_name: 'primary'
+    # The location of published maya files
+    hiero_project_publish:
+        definition: 'editorial/publish/{name}_v{version}.hrox'
+        root_name: 'primary'
+    hiero_project_publish_area:
+        definition: 'editorial/publish'
+        root_name: 'primary'
+        
     ##########################################################################################
     # Sequence level paths
     #
