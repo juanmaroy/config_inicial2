@@ -164,7 +164,7 @@ paths:
     hiero_project_publish_area:
         definition: 'editorial/publish'
         root_name: 'primary'
-        
+
     ##########################################################################################
     # Sequence level paths
     #
@@ -233,10 +233,6 @@ paths:
         root_name: 'primary'
     # Lugar para publicacion de los RENDER de Maya
     maya_shot_render:
-      # definition: '@shot_root/work/images/{maya.camera_name}/{maya.layer_name}/v{version}/{name}.{SEQ}.png'
-      # prueba de carpeta OPCIONAL
-      # definition: '@shot_root/work/maya/images/[{maya.camera_name}/]{name}.v{version}.{SEQ}.exr'
-      # definition: '@shot_root/work/maya/images/{maya.camera_name}/{maya.camera_name}_{name}.v{version}.{SEQ}.png'
       # definition: '@shot_root/work/maya/images/NAU_{Sequence}_{Shot}_{name}_v{version}.{SEQ}.png'
       definition: '@shot_root/work/maya/images/{maya.camera_name}/{maya.layer_name}/{name}.{SEQ}.png'
       root_name: 'primary'
