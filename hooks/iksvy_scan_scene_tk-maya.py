@@ -73,6 +73,7 @@ class ScanSceneHook(Hook):
         if cmds.ls(geometry=True, noIntermediate=True):
             items.append({"type":"geometry", "name":"All Scene Geometry"})
 
+        # CAMARA CAMARA CAMARA CAMARA CAMARA CAMARA CAMARA CAMARA
         # Modificacion para publicar CAMARAS
         # look for cameras to publish
         # Evito la cámara "persp"
@@ -80,6 +81,7 @@ class ScanSceneHook(Hook):
         for camera in cameras:
             items.append({"type": "camera", "name": camera})
 
+        # ALEMBIC ALEMBIC ALEMBIC ALEMBIC ALEMBIC ALEMBIC ALEMBIC
         # Modificacion para publicar ALEMBIC
         # look for root level groups that have meshes as children:
         for grp in cmds.ls(assemblies=True, long=True):
@@ -87,6 +89,7 @@ class ScanSceneHook(Hook):
                 # include this group as a 'mesh_group' type
                 items.append({"type":"mesh_group", "name":grp})
 
+        # RENDER RENDER RENDER RENDER RENDER RENDER RENDER RENDER 
         # Modificacion para publicar RENDER
         # we'll use the engine to get the templates
         engine = tank.platform.current_engine()
@@ -143,7 +146,7 @@ class ScanSceneHook(Hook):
                         # 'name': layer,
                         # 'name': name,  # DA ERROR porque el nombre tiene .ma
                         # <Sgtk StringKey name> Illegal value 'scene.v008.ma' does not fit filter_by 'alphanumeric'
-                        # Este nombre va a ser el nombre del fichero(s) publicado 
+                        # Este nombre va a ser el nombre del fichero(s) publicado
                         'name': name.split('.')[0],  # ESTE FUNCIONA
                         'version': version,
                     }
