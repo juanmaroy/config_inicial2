@@ -40,10 +40,11 @@ engines:
           name: tk-multi-breakdown
       tk-multi-loader2:
         action_mappings:
+          Alembic Cache: [reference, import]
+          Camera: [reference, import]
           Maya Scene: [reference, import]
           Photoshop Image: [texture_node]
           Rendered Image: [texture_node]
-          Camera: [import]
         actions_hook: '{self}/tk-maya_actions.py'
         download_thumbnails: true
         entities:
