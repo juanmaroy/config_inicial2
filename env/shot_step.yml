@@ -235,7 +235,10 @@ engines:
           Nuke Script: [script_import]
           Rendered Image: [read_node]
           Alembic Cache: [read_node]
-        actions_hook: '{self}/tk-nuke_actions.py'
+          Camera: [cam_node]
+        # actions_hook: '{self}/tk-nuke_actions.py'
+        # Modificado para importar Cámaras
+        actions_hook: iksvy_tk-nuke_actions.py
         download_thumbnails: true
         entities:
         - caption: Assets
