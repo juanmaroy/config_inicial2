@@ -281,7 +281,18 @@ paths:
     nuke_shot_render_movie:
         definition: '@shot_root/review/NAU_{Sequence}_{Shot}_{name}_{nuke.output}_v{version}.mov'
         root_name: 'primary'
+    #
+    # Hiero
+    #
 
+    # export of shot asset data from hiero
+    hiero_plate_path:
+        definition: 'sequences/{Sequence}/{Shot}/editorial/{YYYY}_{MM}_{DD}/plates/{project}_{Shot}.mov'
+        root_name: 'primary'
+    hiero_render_path:
+        definition: 'sequences/{Sequence}/{Shot}/editorial/{YYYY}_{MM}_{DD}/renders/{project}_{Shot}.{SEQ}.dpx'
+        root_name: 'primary'
+        
     ##########################################################################################
     # Asset pipeline
 
