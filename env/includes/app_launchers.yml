@@ -158,7 +158,7 @@ launch_nukex:
   mac_path: '@nukex_mac'
   menu_name: Launch NukeX
   versions: []
-  windows_args: '--nukex --nc'
+  windows_args: '--nukex'
   windows_path: '@nukex_windows'
 #
 # -------------------------------------------------

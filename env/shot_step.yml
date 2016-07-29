@@ -236,9 +236,13 @@ engines:
           Rendered Image: [read_node]
           Alembic Cache: [read_node]
           Camera: [cam_node]
+
+=======
+        # Original:
         # actions_hook: '{self}/tk-nuke_actions.py'
         # Modificado para importar Cámaras
-        actions_hook: iksvy_tk-nuke_actions.py
+        actions_hook: '{config}/iksvy_tk-nuke_actions.py'
+>>>>>>> eb5ae0175cc11a7a587282ed6f260a7de17cac2a
         download_thumbnails: true
         entities:
         - caption: Assets
