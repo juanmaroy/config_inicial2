@@ -77,16 +77,12 @@ class NukeActions(HookBaseClass):
                                       "caption": "Import Contents",
                                       "description": "This will import all the nodes into the current scene."} )
 
-<<<<<<< HEAD
-=======
         if "cam_node" in actions:
             action_instances.append( {"name": "cam_node",
                                       "params": None,
                                       "caption": "Create Camera Node",
                                       "description": "This will add a Camera node to the current scene."} )
->>>>>>> eb5ae0175cc11a7a587282ed6f260a7de17cac2a
         return action_instances
-
 
     def execute_action(self, name, params, sg_publish_data):
         """
