@@ -234,7 +234,7 @@ paths:
     # Lugar para publicacion de los RENDER de Maya
     maya_shot_render:
       # definition: '@shot_root/work/maya/images/NAU_{Sequence}_{Shot}_{name}_v{version}.{SEQ}.png'
-      definition: '@shot_root/work/maya/images/{maya.camera_name}/{maya.layer_name}/{name}.{SEQ}.png'
+      definition: '@shot_root/work/maya/images/{maya.camera_name}/{maya.layer_name}/{name}.{SEQ}.EXR'
       root_name: 'primary'
 
     #
@@ -292,7 +292,7 @@ paths:
     hiero_render_path:
         definition: 'sequences/{Sequence}/{Shot}/editorial/{YYYY}_{MM}_{DD}/renders/{project}_{Shot}.{SEQ}.dpx'
         root_name: 'primary'
-        
+
     ##########################################################################################
     # Asset pipeline
 
