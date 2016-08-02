@@ -435,6 +435,20 @@ engines:
             datatype: 16 bit half
           tank_type: Rendered Image
           tile_color: []
+        - file_type: exr
+          name: Mono Exr, 16 bit
+          promote_write_knobs: []
+          proxy_publish_template:
+          proxy_render_template:
+          publish_template: nuke_shot_render_mono_exr16
+          render_template: nuke_shot_render_pub_mono_exr16
+          settings:
+            datatype: 16 bit
+            compression: ZIP1
+            # channels: all
+            # colorspace: linear
+          tank_type: Rendered Image
+          tile_color: []
         - file_type: dpx
           name: Mono Dpx
           promote_write_knobs: []
