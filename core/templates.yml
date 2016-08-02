@@ -268,6 +268,13 @@ paths:
     nuke_shot_render_pub_mono_dpx:
         definition: '@shot_root/publish/elements/{name}/v{version}/{width}x{height}/NAU_{Sequence}_{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.dpx'
         root_name: 'primary'
+    nuke_shot_render_mono_exr16:
+        definition: '@shot_root/work/images/{name}/v{version}/{width}x{height}/NAU_{Sequence}_{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+        root_name: 'primary'
+    nuke_shot_render_pub_mono_exr16:
+        definition: '@shot_root/publish/elements/{name}/v{version}/{width}x{height}/NAU_{Sequence}_{Shot}_{name}_{nuke.output}_v{version}.{SEQ}.exr'
+        root_name: 'primary'
+
     nuke_shot_render_stereo:
         definition: '@shot_root/work/images/{name}/v{version}/{width}x{height}/NAU_{Sequence}_{Shot}_{name}_{nuke.output}_{eye}_v{version}.{SEQ}.exr'
         root_name: 'primary'
