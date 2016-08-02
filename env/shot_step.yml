@@ -445,8 +445,8 @@ engines:
           settings:
             datatype: 16 bit
             compression: ZIP1
-            # channels: all
-            # colorspace: linear
+            channels: all
+            colorspace: linear
           tank_type: Rendered Image
           tile_color: []
         - file_type: dpx
